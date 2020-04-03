@@ -12,12 +12,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_p.mk)
 # Inherit from onclite device
 $(call inherit-product, device/xiaomi/onclite/device.mk)
 
-# Inherit some AEX stuff.
-$(call inherit-product, vendor/aosp/common.mk)
-
-# Bootanimation res
-TARGET_BOOT_ANIMATION_RES := 1080
-
 # Device identifier. This must come after all inclusions.
 PRODUCT_NAME := aosp_onclite
 PRODUCT_DEVICE := onclite
