@@ -43,17 +43,23 @@ BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --set_hashtree_disabled_flag
 # Kernel
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_CMDLINE := console=ttyMSM0,115200,n8 androidboot.console=ttyMSM0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci earlycon=msm_serial_dm,0x78af000 firmware_class.path=/vendor/firmware_mnt/image androidboot.usbconfigfs=true loop.max_part=7
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 BOARD_KERNEL_PAGESIZE :=  2048
 BOARD_BOOTIMG_HEADER_VERSION := 1
 BOARD_MKBOOTIMG_ARGS := --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
-TARGET_KERNEL_SOURCE := kernel/xiaomi/onclite
-TARGET_KERNEL_CONFIG := onclite-perf_defconfig
+#TARGET_KERNEL_SOURCE := kernel/xiaomi/onclite
+#TARGET_KERNEL_CONFIG := onclite-perf_defconfig
 BOARD_KERNEL_SEPARATED_DTBO := true
+TARGET_PREBUILT_KERNEL :=  $(DEVICE_PATH)/prebuilt/zImage
+BOARD_INCLUDE_RECOVERY_DTBO := true
+BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
 BOARD_DTBOIMG_PARTITION_SIZE := 8388608
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_CLANG_COMPILE := true
 TARGET_KERNEL_VERSION := 4.9
+BOARD_VENDOR_KERNEL_MODULES += \
+    $(wildcard $(DEVICE_PATH)/prebuilt/modules/*.ko)
 
 # ANT
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
@@ -192,14 +198,15 @@ ENABLE_VENDOR_RIL_SERVICE := true
 TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
 
 # Recovery
+TARGET_OTA_ALLOW_NON_AB := true
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
 
 # Releasetools
 TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)
 
 # SELinux
-include device/qcom/sepolicy-legacy-um/sepolicy.mk
-BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
+#include device/qcom/sepolicy-legacy-um/sepolicy.mk
+#BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
 
 # Treble
 BOARD_VNDK_VERSION := current
@@ -221,6 +228,16 @@ WIFI_DRIVER_FW_PATH_AP := "ap"
 WIFI_DRIVER_FW_PATH_STA := "sta"
 WIFI_HIDL_FEATURE_DISABLE_AP_MAC_RANDOMIZATION := true
 WPA_SUPPLICANT_VERSION := VER_0_8_X
+
+# Extra Qcom flags
+BOARD_USES_ADRENO := true
+TARGET_COMPILE_WITH_MSM_KERNEL := true
+TARGET_USES_QCOM_MM_AUDIO := true
+TARGET_USES_COLOR_METADATA := true
+MSM_VIDC_TARGET_LIST := msm8937 msm8953 msm8996
+QCOM_HARDWARE_VARIANT := msm8996
+MASTER_SIDE_CP_TARGET_LIST := msm8996 msm8998 sdm660 sdm710 sdm845 msmnile trinket sm6150 kona lito atoll bengal
+QCOM_BOARD_PLATFORMS += msm8953
 
 # Inherit from the proprietary version
 -include vendor/xiaomi/onclite/BoardConfigVendor.mk
