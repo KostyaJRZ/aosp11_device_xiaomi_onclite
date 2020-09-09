@@ -16,6 +16,8 @@
 
 $(call inherit-product, vendor/xiaomi/onclite/onclite-vendor.mk)
 
+include $(LOCAL_PATH)/qcom_utils.mk
+
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 #DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay-lineage
@@ -23,6 +25,9 @@ DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 PRODUCT_ENFORCE_RRO_TARGETS := *
 #PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
 #    $(LOCAL_PATH)/overlay-lineage/lineage-sdk
+
+# KErnel
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/prebuilt/zImage:kernel
 
 # Permission
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -164,8 +169,8 @@ PRODUCT_PACKAGES += \
     vendor.display.config@1.9
 
 # Doze mode
-PRODUCT_PACKAGES += \
-    XiaomiDoze
+#PRODUCT_PACKAGES += \
+#    XiaomiDoze
 
 # DRM
 PRODUCT_PACKAGES += \
@@ -337,10 +342,10 @@ PRODUCT_PACKAGES += \
     qti_telephony_hidl_wrapper.xml \
     qti-telephony-utils \
     qti_telephony_utils.xml \
-    telephony-ext
+ #   telephony-ext
 
-PRODUCT_BOOT_JARS += \
-    telephony-ext
+#PRODUCT_BOOT_JARS += \
+#    telephony-ext
 
 # Seccomp policy
 PRODUCT_COPY_FILES += \
@@ -419,8 +424,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libnl
 
-PRODUCT_BOOT_JARS += \
-    WfdCommon
+#PRODUCT_BOOT_JARS += \
+#    WfdCommon
 
 # Extra stuffs
 PRODUCT_PACKAGES += \
