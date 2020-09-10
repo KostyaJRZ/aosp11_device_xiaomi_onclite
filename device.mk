@@ -29,8 +29,11 @@ PRODUCT_ENFORCE_RRO_TARGETS := *
 # KErnel
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/prebuilt/zImage:kernel
 
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/prebuilt/libprotobuf-cpp-lite.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libprotobuf-cpp-lite.so
-
+PRODUCT_COPY_FILES += \
+     $(LOCAL_PATH)/prebuilt/libprotobuf-cpp-lite.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libprotobuf-cpp-lite.so \
+     $(LOCAL_PATH)/prebuilt/libprotobuf-cpp-full.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libprotobuf-cpp-full.so \
+     $(LOCAL_PATH)/prebuilt/libstdc++.so:$(TARGET_COPY_OUT_VENDOR)/lib/libstdc++.so \
+     $(LOCAL_PATH)/prebuilt/wcnss_service:$(TARGET_COPY_OUT_VENDOR)/bin/wcnss_service
 # Permission
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.control_privapp_permissions=enforce
@@ -337,7 +340,11 @@ PRODUCT_PACKAGES += \
 # RIL
 PRODUCT_PACKAGES += \
     android.hardware.radio@1.4 \
+    android.hardware.radio@1.4.vendor \
     android.hardware.radio.config@1.1 \
+    android.hardware.radio.config@1.1.vendor \
+    android.hardware.radio.deprecated@1.0 \
+    android.hardware.radio.deprecated@1.0.vendor \
     android.hardware.secure_element@1.0 \
     librmnetctl \
     libcnefeatureconfig \
