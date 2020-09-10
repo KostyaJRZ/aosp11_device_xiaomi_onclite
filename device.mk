@@ -29,12 +29,16 @@ PRODUCT_ENFORCE_RRO_TARGETS := *
 # KErnel
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/prebuilt/zImage:kernel
 
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/prebuilt/libprotobuf-cpp-lite.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libprotobuf-cpp-lite.so
+
 # Permission
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.control_privapp_permissions=enforce
 
 # VND
-PRODUCT_PACKAGES += vndservicemanager
+PRODUCT_PACKAGES += \
+      libstdc++.vendor \
+      libhwbinder.vendor
 
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
@@ -342,7 +346,7 @@ PRODUCT_PACKAGES += \
     qti_telephony_hidl_wrapper.xml \
     qti-telephony-utils \
     qti_telephony_utils.xml \
- #   telephony-ext
+    telephony-ext
 
 #PRODUCT_BOOT_JARS += \
 #    telephony-ext
@@ -390,7 +394,8 @@ PRODUCT_PACKAGES += \
 
 # VNDK
 PRODUCT_PACKAGES += \
-    vndk_package
+    vndk_package \
+    com.android.vndk.current.on_vendor
 
 # Whitelisted app
 PRODUCT_COPY_FILES += \
