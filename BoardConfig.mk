@@ -144,6 +144,8 @@ TARGET_USES_HWC2 := true
 MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
 
+TARGET_SCREEN_DENSITY := 320
+
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
 # DRM
@@ -244,10 +246,6 @@ MSM_VIDC_TARGET_LIST := msm8937 msm8953 msm8996
 QCOM_HARDWARE_VARIANT := msm8996
 MASTER_SIDE_CP_TARGET_LIST := msm8996 msm8998 sdm660 sdm710 sdm845 msmnile trinket sm6150 kona lito atoll bengal
 QCOM_BOARD_PLATFORMS += msm8953
-
-TARGET_QCOM_DISPLAY_VARIANT := caf-msm8996
-TARGET_QCOM_MEDIA_VARIANT := caf-msm8996
-TARGET_QCOM_AUDIO_VARIANT := caf-msm8996
 
 # Inherit from the proprietary version
 -include vendor/xiaomi/onclite/BoardConfigVendor.mk
